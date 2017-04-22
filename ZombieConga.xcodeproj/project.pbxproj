@@ -13,6 +13,7 @@
 		D55B1E7E1E9EDB2200787DFB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55B1E7C1E9EDB2200787DFB /* Main.storyboard */; };
 		D55B1E801E9EDB2200787DFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D55B1E7F1E9EDB2200787DFB /* Assets.xcassets */; };
 		D55B1E831E9EDB2200787DFB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D55B1E811E9EDB2200787DFB /* LaunchScreen.storyboard */; };
+		D59E76441EABFF54000AD2C7 /* MyUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = D59E76431EABFF54000AD2C7 /* MyUtils.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		D55B1E7F1E9EDB2200787DFB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D55B1E821E9EDB2200787DFB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D55B1E841E9EDB2200787DFB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D59E76431EABFF54000AD2C7 /* MyUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyUtils.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,6 +61,7 @@
 				D55B1E721E9EDB2200787DFB /* AppDelegate.swift */,
 				D55B1E781E9EDB2200787DFB /* GameScene.swift */,
 				D55B1E7A1E9EDB2200787DFB /* GameViewController.swift */,
+				D59E76431EABFF54000AD2C7 /* MyUtils.swift */,
 				D55B1E7C1E9EDB2200787DFB /* Main.storyboard */,
 				D55B1E7F1E9EDB2200787DFB /* Assets.xcassets */,
 				D55B1E811E9EDB2200787DFB /* LaunchScreen.storyboard */,
@@ -143,6 +146,7 @@
 				D55B1E791E9EDB2200787DFB /* GameScene.swift in Sources */,
 				D55B1E7B1E9EDB2200787DFB /* GameViewController.swift in Sources */,
 				D55B1E731E9EDB2200787DFB /* AppDelegate.swift in Sources */,
+				D59E76441EABFF54000AD2C7 /* MyUtils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
