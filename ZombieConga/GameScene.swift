@@ -13,7 +13,8 @@ class GameScene: SKScene {
     var zombie: SKSpriteNode!
     var lastUpdateTime: TimeInterval = 0
     var dt: TimeInterval = 0
-    let zombieMoviePointsPerSec: CGFloat = 480.0
+    let zombieMovePointsPerSec: CGFloat = 480.0
+    let zombieRotateRadiansPerSec: CGFloat = 4.0 * pi
     var velocity = CGPoint.zero
     
     let playableRect: CGRect
@@ -82,6 +83,10 @@ class GameScene: SKScene {
         sceneTouched(touchLocation: touchLocation)
     }
     
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+    }
+    
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         guard let touch = touches.first else {
             return
@@ -108,7 +113,7 @@ class GameScene: SKScene {
     func moveZombieToward(location: CGPoint) {
         let offset = location - zombie.position
         let direction = offset.normalized()
-        velocity = direction * zombieMoviePointsPerSec
+        velocity = direction * zombieMovePointsPerSec
     }
     
     func boundsCheckZombie() {
@@ -139,7 +144,11 @@ class GameScene: SKScene {
     }
     
     func rotate(sprite: SKSpriteNode, direction: CGPoint) {
-        sprite.zRotation = direction.angle
+        let shortest = shortestAngleBetween(angle1: sprite.zRotation, angle2: velocity.angle)
+        let amountToRotate = min(zombieRotateRadiansPerSec * CGFloat(dt), abs(shortest))
+        sprite.zRotation += shortest.sign() * amountToRotate
+
+        
     }
     
     func checkLastLocation(lastTouchedLocation: CGPoint?)->Bool {
@@ -148,7 +157,7 @@ class GameScene: SKScene {
         }
         
         let offsetOfLastTouchAndZombieCurrentPosition = lastTouchedLocation - zombie.position
-        if offsetOfLastTouchAndZombieCurrentPosition.length() <= zombieMoviePointsPerSec * CGFloat(dt) {
+        if offsetOfLastTouchAndZombieCurrentPosition.length() <= zombieMovePointsPerSec * CGFloat(dt) {
             zombie.position = lastTouchedLocation
             velocity = CGPoint.zero
             return false
