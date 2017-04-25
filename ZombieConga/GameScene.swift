@@ -47,6 +47,7 @@ class GameScene: SKScene {
         
         
         addZombie()
+        spawnEnemy()
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -164,5 +165,34 @@ class GameScene: SKScene {
         } else {
             return true
         }
+    }
+    
+    func spawnEnemy() {
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: size.height/2)
+        addChild(enemy)
+        //let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width/2, y:enemy.position.y ), duration: 2.0)
+        //let actionMoveTwo = SKAction.moveBy(x: zombie.position.x, y: zombie.position.y, duration: 2.0)
+        //let actionTest = SKAction.move(to: zombie.position, duration: 2.0)
+        sequenceActionExample(enemy: enemy)
+        //enemy.run(actionMove)
+    }
+    
+    func sequenceActionExample(enemy: SKSpriteNode) {
+        //let actionMidMove = SKAction.move(to: CGPoint(x: size.width/2, y:playableRect.minY + enemy.size.height/2), duration: 1.0)
+        let actionMidMove = SKAction.moveBy(x: -size.width/2 - enemy.size.width/2, y: -playableRect.height/2 + enemy.size.height/2, duration: 1.0)
+        //let actionMove = SKAction.move(to: CGPoint(x: -enemy.size.width/2, y:enemy.position.y), duration: 1.0)
+        let actionMove = SKAction.moveBy(x: -size.width/2-enemy.size.width/2, y: playableRect.height/2, duration: 1.0)
+        let wait = SKAction.wait(forDuration: 0.25)
+        let logMessage = SKAction.run() {
+            print("Reached bottom!")
+        }
+        
+        let reverseMid = actionMidMove.reversed()
+        let reverseMove = actionMove.reversed()
+        //let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
+        let halfSequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
+        let sequence = SKAction.sequence([halfSequence, halfSequence.reversed()])
+        enemy.run(sequence)
     }
 }
