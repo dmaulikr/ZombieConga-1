@@ -19,6 +19,7 @@ class GameScene: SKScene {
     
     let playableRect: CGRect
     var lastTouchLocation: CGPoint?
+    let zombieAnimation: SKAction
     
     override init(size: CGSize) {
         print("Size \(size)")
@@ -28,6 +29,15 @@ class GameScene: SKScene {
         let playableMargin = (size.height-playableHeight)/2.0 //3
         playableRect = CGRect(x: 0, y: playableMargin, width: size.width, height: playableHeight)//4
         
+        //1
+        var textures: [SKTexture] = []
+        for i in 1...4 {
+            textures.append(SKTexture(imageNamed: "zombie\(i)"))
+        }
+        textures.append(textures[2])
+        textures.append(textures[1])
+        
+        zombieAnimation = SKAction.animate(with: textures, timePerFrame: 0.1)
         super.init(size: size)
     }
     
@@ -47,7 +57,11 @@ class GameScene: SKScene {
         
         
         addZombie()
-        spawnEnemy()
+        //spawnEnemy()
+        run(SKAction.repeatForever(
+            SKAction.sequence([SKAction.run() { [weak self] in
+                self?.newSpawnEnemy()},
+                               SKAction.wait(forDuration: 2.0)])))
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -100,6 +114,8 @@ class GameScene: SKScene {
         zombie = SKSpriteNode(imageNamed: "zombie1")
         zombie.position = CGPoint(x: 400, y: 400)
         addChild(zombie)
+        //zombie.run(SKAction.repeatForever(zombieAnimation))
+        
     }
     
     func move(sprite: SKSpriteNode, velocity: CGPoint) {
@@ -115,6 +131,7 @@ class GameScene: SKScene {
         let offset = location - zombie.position
         let direction = offset.normalized()
         velocity = direction * zombieMovePointsPerSec
+        startZombieAnimation()
     }
     
     func boundsCheckZombie() {
@@ -161,6 +178,7 @@ class GameScene: SKScene {
         if offsetOfLastTouchAndZombieCurrentPosition.length() <= zombieMovePointsPerSec * CGFloat(dt) {
             zombie.position = lastTouchedLocation
             velocity = CGPoint.zero
+            stopZombieAnimation()
             return false
         } else {
             return true
@@ -178,6 +196,16 @@ class GameScene: SKScene {
         //enemy.run(actionMove)
     }
     
+    func newSpawnEnemy() {
+        let enemy = SKSpriteNode(imageNamed: "enemy")
+        enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: CGFloat.random(min: playableRect.minY + enemy.size.height/2, max: playableRect.maxY - enemy.size.height/2))
+        addChild(enemy)
+        
+        let actionMove = SKAction.moveTo(x: -enemy.size.width/2, duration: 2.0)
+        let actionRemove = SKAction.removeFromParent()
+        enemy.run(SKAction.sequence([actionMove, actionRemove]))
+    }
+    
     func sequenceActionExample(enemy: SKSpriteNode) {
         //let actionMidMove = SKAction.move(to: CGPoint(x: size.width/2, y:playableRect.minY + enemy.size.height/2), duration: 1.0)
         let actionMidMove = SKAction.moveBy(x: -size.width/2 - enemy.size.width/2, y: -playableRect.height/2 + enemy.size.height/2, duration: 1.0)
@@ -188,11 +216,23 @@ class GameScene: SKScene {
             print("Reached bottom!")
         }
         
-        let reverseMid = actionMidMove.reversed()
-        let reverseMove = actionMove.reversed()
+        //let reverseMid = actionMidMove.reversed()
+        //let reverseMove = actionMove.reversed()
         //let sequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove, reverseMove, logMessage, wait, reverseMid])
         let halfSequence = SKAction.sequence([actionMidMove, logMessage, wait, actionMove])
         let sequence = SKAction.sequence([halfSequence, halfSequence.reversed()])
-        enemy.run(sequence)
+        let repeatAction = SKAction.repeatForever(sequence)
+        enemy.run(repeatAction)
+        
+    }
+    
+    func startZombieAnimation() {
+        if zombie.action(forKey: "animation") == nil {
+            zombie.run(SKAction.repeatForever(zombieAnimation), withKey: "animation")
+        }
+    }
+    
+    func stopZombieAnimation() {
+        zombie.removeAction(forKey: "animation")
     }
 }
