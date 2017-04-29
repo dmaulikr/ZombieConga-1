@@ -21,6 +21,9 @@ class GameScene: SKScene {
     var lastTouchLocation: CGPoint?
     let zombieAnimation: SKAction
     
+    let catCollisionSound = SKAction.playSoundFileNamed("hitCat.wav", waitForCompletion: false)
+    let enemyCollisionSOund = SKAction.playSoundFileNamed("hitCatLady.wav", waitForCompletion: false)
+    
     override init(size: CGSize) {
         print("Size \(size)")
         
@@ -86,7 +89,12 @@ class GameScene: SKScene {
         }
 
         boundsCheckZombie()
+        //checkCollisiions()
 
+    }
+    
+    override func didEvaluateActions() {
+        checkCollisiions()
     }
     
     func sceneTouched(touchLocation: CGPoint) {
@@ -204,6 +212,7 @@ class GameScene: SKScene {
     func newSpawnEnemy() {
         let enemy = SKSpriteNode(imageNamed: "enemy")
         enemy.position = CGPoint(x: size.width + enemy.size.width/2, y: CGFloat.random(min: playableRect.minY + enemy.size.height/2, max: playableRect.maxY - enemy.size.height/2))
+        enemy.name = "enemy"
         addChild(enemy)
         
         let actionMove = SKAction.moveTo(x: -enemy.size.width/2, duration: 2.0)
@@ -250,6 +259,7 @@ class GameScene: SKScene {
             y: CGFloat.random(min: playableRect.minY,
                               max: playableRect.maxY))
         cat.setScale(0)
+        cat.name = "cat"
         addChild(cat)
         
         //2
@@ -272,5 +282,41 @@ class GameScene: SKScene {
         let actions = [appear,groupWait, disappear, removeFromParent]
         cat.run(SKAction.sequence(actions))
 
+    }
+    
+    func zombieHit(cat: SKSpriteNode) {
+        cat.removeFromParent()
+        run(catCollisionSound)
+    }
+    
+    func zombieHit(enemy: SKSpriteNode) {
+        enemy.removeFromParent()
+        run(enemyCollisionSOund)
+    }
+    
+    func checkCollisiions() {
+        var hitCats = [SKSpriteNode]()
+        enumerateChildNodes(withName: "cat") { node, _ in
+            let cat = node as! SKSpriteNode
+            if cat.frame.intersects(self.zombie.frame) {
+                hitCats.append(cat)
+            }
+        }
+        
+        for cat in hitCats {
+            zombieHit(cat: cat)
+        }
+        
+        var hitEnemies = [SKSpriteNode]()
+        enumerateChildNodes(withName: "enemy") { node, _ in
+            let enemy = node as! SKSpriteNode
+            if node.frame.insetBy(dx: 20, dy: 20).intersects(self.zombie.frame) {
+                hitEnemies.append(enemy)
+            }
+        }
+        
+        for enemy in hitEnemies {
+            zombieHit(enemy: enemy)
+        }
     }
 }

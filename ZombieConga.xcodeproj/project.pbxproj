@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D5564BCA1EB52C21006AF8C5 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = D5564BC91EB52C21006AF8C5 /* Sounds */; };
+		D5564BD01EB52CA7006AF8C5 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCB1EB52CA7006AF8C5 /* backgroundMusic.mp3 */; };
+		D5564BD11EB52CA7006AF8C5 /* hitCat.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCC1EB52CA7006AF8C5 /* hitCat.wav */; };
+		D5564BD21EB52CA7006AF8C5 /* hitCatLady.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCD1EB52CA7006AF8C5 /* hitCatLady.wav */; };
+		D5564BD31EB52CA7006AF8C5 /* lose.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCE1EB52CA7006AF8C5 /* lose.wav */; };
+		D5564BD41EB52CA7006AF8C5 /* win.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCF1EB52CA7006AF8C5 /* win.wav */; };
 		D55B1E731E9EDB2200787DFB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55B1E721E9EDB2200787DFB /* AppDelegate.swift */; };
 		D55B1E791E9EDB2200787DFB /* GameScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55B1E781E9EDB2200787DFB /* GameScene.swift */; };
 		D55B1E7B1E9EDB2200787DFB /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D55B1E7A1E9EDB2200787DFB /* GameViewController.swift */; };
@@ -17,6 +23,12 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D5564BC91EB52C21006AF8C5 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
+		D5564BCB1EB52CA7006AF8C5 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = backgroundMusic.mp3; path = Sounds/backgroundMusic.mp3; sourceTree = "<group>"; };
+		D5564BCC1EB52CA7006AF8C5 /* hitCat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitCat.wav; path = Sounds/hitCat.wav; sourceTree = "<group>"; };
+		D5564BCD1EB52CA7006AF8C5 /* hitCatLady.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitCatLady.wav; path = Sounds/hitCatLady.wav; sourceTree = "<group>"; };
+		D5564BCE1EB52CA7006AF8C5 /* lose.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = lose.wav; path = Sounds/lose.wav; sourceTree = "<group>"; };
+		D5564BCF1EB52CA7006AF8C5 /* win.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = win.wav; path = Sounds/win.wav; sourceTree = "<group>"; };
 		D55B1E6F1E9EDB2200787DFB /* ZombieConga.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ZombieConga.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D55B1E721E9EDB2200787DFB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D55B1E781E9EDB2200787DFB /* GameScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameScene.swift; sourceTree = "<group>"; };
@@ -64,6 +76,12 @@
 				D59E76431EABFF54000AD2C7 /* MyUtils.swift */,
 				D55B1E7C1E9EDB2200787DFB /* Main.storyboard */,
 				D55B1E7F1E9EDB2200787DFB /* Assets.xcassets */,
+				D5564BCB1EB52CA7006AF8C5 /* backgroundMusic.mp3 */,
+				D5564BCC1EB52CA7006AF8C5 /* hitCat.wav */,
+				D5564BCD1EB52CA7006AF8C5 /* hitCatLady.wav */,
+				D5564BCE1EB52CA7006AF8C5 /* lose.wav */,
+				D5564BCF1EB52CA7006AF8C5 /* win.wav */,
+				D5564BC91EB52C21006AF8C5 /* Sounds */,
 				D55B1E811E9EDB2200787DFB /* LaunchScreen.storyboard */,
 				D55B1E841E9EDB2200787DFB /* Info.plist */,
 			);
@@ -132,7 +150,13 @@
 			files = (
 				D55B1E7E1E9EDB2200787DFB /* Main.storyboard in Resources */,
 				D55B1E801E9EDB2200787DFB /* Assets.xcassets in Resources */,
+				D5564BCA1EB52C21006AF8C5 /* Sounds in Resources */,
+				D5564BD11EB52CA7006AF8C5 /* hitCat.wav in Resources */,
+				D5564BD01EB52CA7006AF8C5 /* backgroundMusic.mp3 in Resources */,
+				D5564BD21EB52CA7006AF8C5 /* hitCatLady.wav in Resources */,
+				D5564BD41EB52CA7006AF8C5 /* win.wav in Resources */,
 				D55B1E831E9EDB2200787DFB /* LaunchScreen.storyboard in Resources */,
+				D5564BD31EB52CA7006AF8C5 /* lose.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
