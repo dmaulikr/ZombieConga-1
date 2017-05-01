@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D5282F4F1EB7E91B00CABC65 /* MainMenuScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5282F4E1EB7E91B00CABC65 /* MainMenuScene.swift */; };
 		D5564BCA1EB52C21006AF8C5 /* Sounds in Resources */ = {isa = PBXBuildFile; fileRef = D5564BC91EB52C21006AF8C5 /* Sounds */; };
 		D5564BD01EB52CA7006AF8C5 /* backgroundMusic.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCB1EB52CA7006AF8C5 /* backgroundMusic.mp3 */; };
 		D5564BD11EB52CA7006AF8C5 /* hitCat.wav in Resources */ = {isa = PBXBuildFile; fileRef = D5564BCC1EB52CA7006AF8C5 /* hitCat.wav */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D5282F4E1EB7E91B00CABC65 /* MainMenuScene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MainMenuScene.swift; path = ../MainMenuScene.swift; sourceTree = "<group>"; };
 		D5564BC91EB52C21006AF8C5 /* Sounds */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Sounds; sourceTree = "<group>"; };
 		D5564BCB1EB52CA7006AF8C5 /* backgroundMusic.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = backgroundMusic.mp3; path = Sounds/backgroundMusic.mp3; sourceTree = "<group>"; };
 		D5564BCC1EB52CA7006AF8C5 /* hitCat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = hitCat.wav; path = Sounds/hitCat.wav; sourceTree = "<group>"; };
@@ -72,6 +74,7 @@
 		D55B1E711E9EDB2200787DFB /* ZombieConga */ = {
 			isa = PBXGroup;
 			children = (
+				D5282F4E1EB7E91B00CABC65 /* MainMenuScene.swift */,
 				D55B1E721E9EDB2200787DFB /* AppDelegate.swift */,
 				D55B1E781E9EDB2200787DFB /* GameScene.swift */,
 				D5564BD51EB54540006AF8C5 /* GameOverScene.swift */,
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D5282F4F1EB7E91B00CABC65 /* MainMenuScene.swift in Sources */,
 				D5564BD61EB54540006AF8C5 /* GameOverScene.swift in Sources */,
 				D55B1E791E9EDB2200787DFB /* GameScene.swift in Sources */,
 				D55B1E7B1E9EDB2200787DFB /* GameViewController.swift in Sources */,

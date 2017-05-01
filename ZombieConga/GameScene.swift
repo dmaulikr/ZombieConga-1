@@ -73,6 +73,8 @@ class GameScene: SKScene {
             SKAction.sequence([SKAction.run() { [weak self] in
                                                 self?.spawnCat()
                 }, SKAction.wait(forDuration: 1.0)])))
+        
+        playBackgroundMusic(filename: "backgroundMusic.mp3")
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -99,7 +101,8 @@ class GameScene: SKScene {
             gameOver = true
             print("You lose!")
             //1
-            let gameOverScene = GameOverScene(size: size)
+            let gameOverScene = GameOverScene(size: size, won: false)
+            backgroundMusicPlayer.stop()
             gameOverScene.scaleMode = scaleMode
             
             //2
@@ -394,7 +397,8 @@ class GameScene: SKScene {
             gameOver = true
             print("You win!")
             //1
-            let gameOverScene = GameOverScene(size: size)
+            let gameOverScene = GameOverScene(size: size, won: true)
+            backgroundMusicPlayer.stop()
             gameOverScene.scaleMode = scaleMode
             //2 
             let reveal = SKTransition.flipHorizontal(withDuration: 0.5)
