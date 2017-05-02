@@ -27,6 +27,17 @@ class GameScene: SKScene {
     var lives = 5
     var gameOver = false
     
+    let cameraNode = SKCameraNode()
+    let cameraMovePointsPerSec: CGFloat = 200.0
+    
+    var cameraRect: CGRect {
+        let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width/2)/2
+        let y = cameraNode.position.y - size.height/2 + (size.height - playableRect.height)/2
+
+        return CGRect (x: x, y: y, width: playableRect.width, height: playableRect.height)
+    }
+
+    
     override init(size: CGSize) {
         print("Size \(size)")
         
@@ -53,14 +64,25 @@ class GameScene: SKScene {
     
     override func didMove(to view: SKView)
     {
-        backgroundColor = SKColor.black
-        let background = SKSpriteNode(imageNamed: "background1")
-        
-        
-        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
-        background.zPosition = -1
-        addChild(background)
-        
+//        backgroundColor = SKColor.black
+//        let background = SKSpriteNode(imageNamed: "background1")
+//        
+//        
+//        background.position = CGPoint(x: size.width / 2, y: size.height / 2)
+//        background.zPosition = -1
+//        let background = backgroundNode()
+//        background.anchorPoint = CGPoint.zero
+//        background.position = CGPoint.zero
+//        background.name = "background"
+//        addChild(background)
+//        
+        for i in 0...1 {
+            let background = backgroundNode()
+            background.anchorPoint = CGPoint.zero
+            background.position = CGPoint(x: CGFloat(i) * background.size.width, y: 0)
+            background.name = "background"
+            addChild(background)
+        }
         
         addZombie()
         //spawnEnemy()
@@ -75,6 +97,10 @@ class GameScene: SKScene {
                 }, SKAction.wait(forDuration: 1.0)])))
         
         playBackgroundMusic(filename: "backgroundMusic.mp3")
+        
+        addChild(cameraNode)
+        camera = cameraNode
+        cameraNode.position = CGPoint(x: size.width/2, y: size.height/2)
     }
     
     override func update(_ currentTime: TimeInterval) {
@@ -96,7 +122,7 @@ class GameScene: SKScene {
         boundsCheckZombie()
         //checkCollisiions()
         moveTrain()
-        
+        moveCamera()
         if lives <= 0 && !gameOver {
             gameOver = true
             print("You lose!")
@@ -111,6 +137,7 @@ class GameScene: SKScene {
             //3 
             view?.presentScene(gameOverScene, transition: reveal)
         }
+        //cameraNode.position = zombie.position
     }
     
     override func didEvaluateActions() {
@@ -423,6 +450,43 @@ class GameScene: SKScene {
             loseCount += 1
             if loseCount >= 2 {
                 stop[0] = true
+            }
+        }
+    }
+    
+    func backgroundNode() ->SKSpriteNode {
+        //1 
+        let backgroundNode = SKSpriteNode()
+        backgroundNode.anchorPoint = CGPoint.zero
+        backgroundNode.name = "background"
+        
+        //2
+        let background1 = SKSpriteNode(imageNamed: "background1")
+        background1.anchorPoint = CGPoint.zero
+        background1.position = CGPoint(x: 0, y: 0)
+        backgroundNode.addChild(background1)
+        
+        //3
+        let background2 = SKSpriteNode(imageNamed: "background2")
+        background2.anchorPoint = CGPoint.zero
+        background2.position = CGPoint(x: background1.size.width, y: 0)
+        backgroundNode.addChild(background2)
+        
+        //4
+        backgroundNode.size = CGSize(width: background1.size.width + background2.size.width, height: background1.size.height)
+        return backgroundNode
+        
+    }
+    
+    func moveCamera() {
+        let backgroundVelocity = CGPoint(x: cameraMovePointsPerSec, y: 0)
+        let amountToMove = backgroundVelocity * CGFloat(dt)
+        camera?.position += amountToMove
+        
+        enumerateChildNodes(withName: "background") { node, _ in
+            let background = node as! SKSpriteNode
+            if background.position.x + background.size.width < self.cameraRect.origin.x {
+                background.position = CGPoint(x: background.position.x + background.size.width * 2, y: background.position.y)
             }
         }
     }
