@@ -31,6 +31,7 @@ class GameScene: SKScene {
     let cameraMovePointsPerSec: CGFloat = 200.0
     
     let livesLabel = SKLabelNode(fontNamed: "Glimstick")
+    let catLabel = SKLabelNode(fontNamed: "Glimstick")
     
     var cameraRect: CGRect {
         let x = cameraNode.position.x - size.width/2 + (size.width - playableRect.width)/2
@@ -113,6 +114,15 @@ class GameScene: SKScene {
         livesLabel.verticalAlignmentMode = .bottom
         livesLabel.position = CGPoint(x: -playableRect.size.width/2 + CGFloat(20), y: -playableRect.size.height/2 + CGFloat(20))
         cameraNode.addChild(livesLabel)
+        
+        catLabel.text = "Cats: x"
+        catLabel.fontColor = SKColor.black
+        catLabel.fontSize = 100
+        catLabel.zPosition = 150
+        catLabel.horizontalAlignmentMode = .right
+        catLabel.verticalAlignmentMode = .bottom
+        catLabel.position = CGPoint(x: playableRect.size.width/2 + CGFloat(-20), y: -playableRect.size.height/2 + CGFloat(20))
+        cameraNode.addChild(catLabel)
         //addChild(livesLabel)
     }
     
@@ -438,7 +448,7 @@ class GameScene: SKScene {
             }
             targetPosition = node.position
         }
-        
+        catLabel.text = "Cats: \(trainCount)"
         if trainCount >= 10 && !gameOver {
             gameOver = true
             print("You win!")
